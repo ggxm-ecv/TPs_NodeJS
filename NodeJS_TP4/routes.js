@@ -82,13 +82,13 @@ module.exports = function(app){
 
   app.get('/params/:id/:key/:slug', function (req, res) {
 
-    let params = {
-      "id": req.params.id,
-      "key": req.params.key,
-      "slug": req.params.slug
-    }
+    // let params = {
+    //   "id": req.params.id,
+    //   "key": req.params.key,
+    //   "slug": req.params.slug
+    // }
 
-    res.json(params);
+    res.json(req.params);
     
   });
 
