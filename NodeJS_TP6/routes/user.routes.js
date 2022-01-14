@@ -37,9 +37,13 @@ const getUserSchema = Joi.object({
 
 const getAllUsersSchema = Joi.array().items(getUserSchema);
 
+const queryPostsSchema = Joi.object({
+  posts: Joi.boolean()
+});
+
 
 router.get('/', validator.response(getAllUsersSchema), controller.getUsers);
-router.get('/:id', validator.response(getUserSchema), controller.getUser);
+router.get('/:id', validator.response(getUserSchema), validator.query(queryPostsSchema), controller.getUser);
 router.post('/', validator.body(registerUserSchema), controller.createUser);
 router.patch('/:id', validator.body(updateUserSchema), controller.updateUser);
 router.delete('/:id', controller.deleteUser);

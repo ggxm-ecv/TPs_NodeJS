@@ -31,8 +31,12 @@ const getPostSchema = Joi.object({
 
 const getAllPostsSchema = Joi.array().items(getPostSchema);
 
+const queryCommentsSchema = Joi.object({
+  comments: Joi.boolean()
+});
+
 router.get('/',validator.response(getAllPostsSchema), controller.getPosts)
-router.get('/:id',validator.response(getPostSchema), controller.getPost)
+router.get('/:id',validator.response(getPostSchema), validator.query(queryCommentsSchema), controller.getPost)
 router.post('/',validator.body(registerPostSchema), controller.createPost)
 router.patch('/:id',validator.body(updatePostSchema), controller.updatePost)
 router.delete('/:id', controller.deletePost)
